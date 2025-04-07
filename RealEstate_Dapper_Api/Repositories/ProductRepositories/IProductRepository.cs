@@ -1,4 +1,5 @@
-﻿using RealEstate_Dapper_Api.Dtos.ProductDtos;
+﻿using Microsoft.AspNetCore.Components.Forms;
+using RealEstate_Dapper_Api.Dtos.ProductDtos;
 
 namespace RealEstate_Dapper_Api.Repositories.ProductRepositories
 {
@@ -6,5 +7,7 @@ namespace RealEstate_Dapper_Api.Repositories.ProductRepositories
     {
         Task<List<ResultProductDto>> GetAllProductAsync();
         Task<List<ResultProductWithCategoryDto>> GetAllProductWithCategoryAsync();
+        void ProductDealOfTheDayStatusChangeToTrue(int id);
+        void ProductDealOfTheDayStatusChangeToFalse(int id);
     }
 }
