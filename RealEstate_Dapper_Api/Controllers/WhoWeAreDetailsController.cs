@@ -37,14 +37,14 @@ namespace RealEstate_Dapper_Api.Controllers
 
         }
 
-        [HttpGet("GetWhoWeAreWithId")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetWhoWeAreDetail(int id)
         {
             var value = await _whoWeAreDetailRepository.GetWhoWeAreDetail(id);
             return Ok(value);
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteWhoWeAreDetail(int id)
         {
             _whoWeAreDetailRepository.DeleteWhoWeAreDetail(id);

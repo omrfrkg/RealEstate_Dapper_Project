@@ -1,0 +1,50 @@
+﻿@model List<ResultPopularLocationDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Admin/Index.cshtml";
+}
+
+<style>
+	img{
+		border-radius:50%;
+		height: 50px;
+		width: 50px;
+		margin-right: 15px;
+	}
+</style>
+
+<div class="container-fluid pt-4 px-4">
+	<div class="row g-4">
+		<div class="col-12">
+			<div class="bg-light rounded h-100 p-4">
+				<h6 class="mb-4">Popüler Lokasyonlar Listesi</h6>
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Şehir Adı</th>
+								<th scope="col">Sil</th>
+								<th scope="col">Güncelle</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var item in Model)
+							{
+								<tr>
+									<th scope="row">@item.LocationID</th>
+									<td><img src="@item.imageUrl" />@item.cityName</td>
+									<td><a href="/PopularLocation/DeletePopularLocation/@item.LocationID" class="btn btn-outline-danger">Sil</a></td>
+									<td><a href="/PopularLocation/UpdatePopularLocation/@item.LocationID" class="btn btn-outline-success">Güncelle</a></td>
+								</tr>
+							}
+						</tbody>
+					</table>
+					<a href="/PopularLocation/CreatePopularLocation/" class="btn btn-outline-info">Yeni Popüler Lokasyon Girişi</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
