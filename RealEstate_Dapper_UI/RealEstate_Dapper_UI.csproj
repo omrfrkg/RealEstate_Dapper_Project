@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\lib\microsoft\**" />
+    <Content Remove="wwwroot\lib\microsoft\**" />
+    <EmbeddedResource Remove="wwwroot\lib\microsoft\**" />
+    <None Remove="wwwroot\lib\microsoft\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
   </ItemGroup>
 

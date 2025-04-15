@@ -1,12 +1,15 @@
+using RealEstate_Dapper_Api.Hubs;
 using RealEstate_Dapper_Api.Models.DapperContext;
 using RealEstate_Dapper_Api.Repositories.BottomGridRepositories;
 using RealEstate_Dapper_Api.Repositories.CategoryRepositories;
+using RealEstate_Dapper_Api.Repositories.ContactRespositories;
 using RealEstate_Dapper_Api.Repositories.EmployeeRepositories;
 using RealEstate_Dapper_Api.Repositories.PopularLocationRepositories;
 using RealEstate_Dapper_Api.Repositories.ProductRepositories;
 using RealEstate_Dapper_Api.Repositories.ServiceRepositories;
 using RealEstate_Dapper_Api.Repositories.StatisticRepositories;
 using RealEstate_Dapper_Api.Repositories.TestimonialRepositories;
+using RealEstate_Dapper_Api.Repositories.ToDoListRepositories;
 using RealEstate_Dapper_Api.Repositories.WhoWeAreRepositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,6 +25,24 @@ builder.Services.AddTransient<IPopularLocationRepository,PopularLocationReposito
 builder.Services.AddTransient<ITestimonialRepository,TestimonialRepository>();
 builder.Services.AddTransient<IEmployeRepository,EmployeRepository>();
 builder.Services.AddTransient<IStatisticRepository,StatisticRepository>();
+builder.Services.AddTransient<IContactRepository,ContactRepository>();
+builder.Services.AddTransient<IToDoListRepository,ToDoListRepository>();
+
+builder.Services.AddCors(opt =>
+{
+    opt.AddPolicy("CorsPolicy", builder =>
+    {
+        builder.AllowAnyHeader()
+               .AllowAnyMethod()
+               .SetIsOriginAllowed((host) => true) // allow any origin
+               .AllowCredentials();
+    });
+});
+
+builder.Services.AddHttpClient();
+
+builder.Services.AddSignalR();
+
 builder.Services.AddControllers();
 
 
@@ -38,10 +59,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("CorsPolicy");
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapHub<SignalRHub>("/signalrhub");
 
 app.Run();
