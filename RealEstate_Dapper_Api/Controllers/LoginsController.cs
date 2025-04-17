@@ -39,7 +39,7 @@ namespace RealEstate_Dapper_Api.Controllers
                 }
                 else
                 {
-                    return Ok("Giriş Başarısız!");
+                    return Unauthorized(new { error = "Kullanıcı adı veya şifre yanlış." });
                 }
             }
         }
