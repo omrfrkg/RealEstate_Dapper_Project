@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RealEstate_Dapper_Api.Dtos.ProductDtos;
 using RealEstate_Dapper_Api.Repositories.ProductRepositories;
 
 namespace RealEstate_Dapper_Api.Controllers
@@ -50,11 +51,25 @@ namespace RealEstate_Dapper_Api.Controllers
             return Ok(values);
         }
 
-        [HttpGet("ProductAdvertsListByEmplooye")]
-        public async Task<IActionResult> ProductAdvertsListByEmplooye(int id)
+        [HttpGet("ProductAdvertsListByEmplooyeByTrue")]
+        public async Task<IActionResult> ProductAdvertsListByEmplooyeByTrue(int id)
         {
-            var values = await _productRepository.GetProductAdvertListByEmplooyeAsync(id);
+            var values = await _productRepository.GetProductAdvertListByEmplooyeByTrueAsync(id);
             return Ok(values);
+        }
+
+        [HttpGet("ProductAdvertsListByEmplooyeByFalse")]
+        public async Task<IActionResult> ProductAdvertsListByEmplooyeByFalse(int id)
+        {
+            var values = await _productRepository.GetProductAdvertListByEmplooyeByFalseAsync(id);
+            return Ok(values);
+        }
+
+        [HttpPost("CreateProduct")]
+        public async Task<IActionResult> CreateProduct(CreateProductDto createProductDto)
+        {
+            await _productRepository.CreateProduct(createProductDto);
+            return Ok("İlan Başarıyla Eklendi");
         }
 
 
