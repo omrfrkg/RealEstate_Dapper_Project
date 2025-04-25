@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using RealEstate_Dapper_Api.Dtos.ProductDetailDtos;
 using RealEstate_Dapper_Api.Dtos.ProductDtos;
 using RealEstate_Dapper_Api.Models.DapperContext;
 
@@ -91,25 +92,51 @@ namespace RealEstate_Dapper_Api.Repositories.ProductRepositories
             }
         }
 
-        public void ProductDealOfTheDayStatusChangeToFalse(int id)
+        public async Task<GetProductByProductIdDto> GetProductByProductID(int id)
+        {
+            string query = "Select ProductID, Title, Price, District, City, CategoryName, CoverImage, Type, Address, DealOfTheDay From Product inner join Category on Product.ProductCategory = Category.CategoryID Where ProductID=@productId";
+            var parameters = new DynamicParameters();
+            parameters.Add("@productId", id);
+            using (var connection = _context.CreateConnection())
+            {
+                var values = await connection.QueryAsync<GetProductByProductIdDto>(query, parameters);
+                return values.FirstOrDefault();
+
+            }
+        }
+
+        public async Task<GetProductDetailByIdDto> GetProductDetailByProductID(int id)
+        {
+            string query = "Select * From ProductDetails Where ProductID=@productId";
+            var parameters = new DynamicParameters();
+            parameters.Add("@productId", id);
+            using (var connection = _context.CreateConnection())
+            {
+                var values = await connection.QueryAsync<GetProductDetailByIdDto>(query, parameters);
+                return values.FirstOrDefault();
+
+            }
+        }
+
+        public async Task ProductDealOfTheDayStatusChangeToFalse(int id)
         {
             string query = "Update Product Set DealOfTheDay = 0 Where ProductID = @id";
             var parameters = new DynamicParameters();
             parameters.Add("@id", id);
             using (var connection = _context.CreateConnection())
             {
-                var values = connection.Execute(query, parameters);
+                await connection.ExecuteAsync(query, parameters);
             }
         }
 
-        public void ProductDealOfTheDayStatusChangeToTrue(int id)
+        public async Task ProductDealOfTheDayStatusChangeToTrue(int id)
         {
             string query = "Update Product Set DealOfTheDay = 1 Where ProductID = @id";
             var parameters = new DynamicParameters();
             parameters.Add("@id", id);
             using (var connection = _context.CreateConnection())
             {
-                var values = connection.Execute(query, parameters);
+                await connection.ExecuteAsync(query, parameters);
             }
         }
     }

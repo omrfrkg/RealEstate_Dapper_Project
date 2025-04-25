@@ -20,3 +20,14 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+#site-header {
+    position: fixed;
+    z-index: 1000; /* Navbar'ý üstte tutar */
+}
+
+.breadcrumb-bg-about {
+    margin-top: 70px; /* Navbar yüksekliðine göre ayarlayýn */
+    background-position: center bottom; /* Arka plan resmini aþaðý kaydýrýr */
+    background-size: cover; /* Resmi kapsayýcýya uygun ölçeklendirir */
+}
