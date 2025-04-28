@@ -1,0 +1,49 @@
+﻿@model RealEstate_Dapper_UI.Dtos.AppUserDtos.GetAppUserByProductIdDto
+
+<style>
+    .post {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .post-thumb {
+        flex: 0 0 auto;
+    }
+
+        .post-thumb img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+        }
+
+    .text {
+        flex: 1;
+    }
+</style>
+
+<div class="sidebar-side col-lg-4 col-md-12 col-sm-12 mt-lg-0 mt-5">
+    <aside class="sidebar">
+        <!-- Popular Post Widget-->
+        <div class="sidebar-widget popular-posts">
+            <div class="sidebar-title">
+                <h4>Emlakçı İletişim Bilgileri</h4>
+            </div>
+
+            <article class="post">
+                <figure class="post-thumb">
+                    <img src="@Model.UserImageUrl" class="radius-image" alt="">
+                </figure>
+                <div class="text mb-0">
+                    <a href="#blog-single">
+                        @Model.Name
+                    </a>
+                    <div class="post-info">@Model.PhoneNumber</div>
+                    <div class="post-info">@Model.Email</div>
+                </div>
+            </article>
+            <button type="submit" class="btn btn-primary btn-style w-100">Detaylı İletişim Bilgileri</button>
+        </div>
+        <!-- Diğer kısımlar aynı kalabilir -->
+    </aside>
+</div>

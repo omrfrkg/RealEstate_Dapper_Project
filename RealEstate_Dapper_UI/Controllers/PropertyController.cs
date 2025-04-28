@@ -49,11 +49,31 @@ namespace RealEstate_Dapper_UI.Controllers
                 ViewBag.district = values.district;
                 ViewBag.address = values.address;
                 ViewBag.type = values.type;
+                ViewBag.description = values.description;
+                ViewBag.productId = values.productId;
+                ViewBag.date = values.advertisementDate;
 
 
                 var jsonData2 = await responseMessage2.Content.ReadAsStringAsync();
                 var values2 = JsonConvert.DeserializeObject<GetProductDetailByIdDto>(jsonData2);
                 ViewBag.bathCount = values2.BathCount;
+
+                
+                DateTime date1 = DateTime.Now;
+                DateTime date2 = values.advertisementDate;
+
+                TimeSpan timeSpan = date1 - date2;
+                int month = timeSpan.Days;
+
+                ViewBag.dateDiff = month / 30;
+
+                ViewBag.bedCount = values2.BedRoomCount;
+                ViewBag.size = values2.ProductSize;
+                ViewBag.roomCount = values2.RoomCount;
+                ViewBag.garageSize = values2.GarageSize;
+                ViewBag.buildYear = values2.BuildYear;
+                ViewBag.location = values2.Location;
+                ViewBag.videoUrl = values2.VideoUrl;
 
 
                 return View(values);
