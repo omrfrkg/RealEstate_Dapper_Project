@@ -79,8 +79,19 @@ namespace RealEstate_Dapper_Api.Controllers
             return Ok(values);
         }
 
+        [HttpGet("GetProductWithSearchList")]
+        public async Task<IActionResult> GetProductWithSearchList(string searchKeyValue, int propertyCategoryId, string city)
+        {
+            var values = await _productRepository.GetProductWithSearchList(searchKeyValue, propertyCategoryId, city);
+            return Ok(values);
+        }
 
-
+        [HttpGet("GetProductByDealOfTheDayTrueWithCategory")]
+        public async Task<IActionResult> GetProductByDealOfTheDayTrueWithCategoryAsync()
+        {
+            var values = await _productRepository.GetProductByDealOfTheDayTrueWithCategoryAsync();
+            return Ok(values);
+        }
 
     }
 }

@@ -1,10 +1,4 @@
 ﻿@model List<ResultCategoryDto>
-@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_DefaultLayout.cshtml";
-}
-
-
 <section class="w3l-cover-3">
     <div class="cover top-bottom">
         <div class="container">
@@ -25,12 +19,12 @@
                         <span class="input-group-btn">
                             <select class="btn btn-default" name="z" required>
                                 <option selected="">Gayrimenkul Türü</option>
-                                @foreach (var item in Model)
-                                {
-                                    <option value="@item.CategoryID">@item.CategoryName</option>
-                                }
-
-
+								@foreach (var item in Model)
+								{
+								<option value="@item.CategoryID">@item.CategoryName</option>
+								}
+                                
+                                
                             </select>
                         </span>
                         <span class="input-group-btn">
@@ -44,7 +38,6 @@
                                 <option>Münih</option>
                                 <option>Berlin</option>
                                 <option>Sofya</option>
-                                <option>İzmir</option>
                             </select>
                         </span>
                         <button type="submit" class="btn-primary">Ara</button>
@@ -57,21 +50,3 @@
         </div>
     </div>
 </section>
-
-
-@await Component.InvokeAsync("_DefaultHomePageProductListComponentPartial")
-
-@await Component.InvokeAsync("_DefaultWhoWeAreComponentPartial")
-
-@await Component.InvokeAsync("_DefaultBottomGridComponentPartial")
-
-@await Component.InvokeAsync("_DefaultProductListExploerCitiesComponentPartial")
-
-@await Component.InvokeAsync("_DefaultOurTestimonialComponentPartial")
-
-@await Component.InvokeAsync("_DefaultSubFeatureComponentPartial")
-
-@await Component.InvokeAsync("_DefaultDiscountOfDayComponentPartial")
-
-@await Component.InvokeAsync("_DefaultBrandComponentPartial")
-
