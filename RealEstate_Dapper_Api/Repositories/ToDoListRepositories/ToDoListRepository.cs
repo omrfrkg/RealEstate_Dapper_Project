@@ -15,17 +15,17 @@ namespace RealEstate_Dapper_Api.Repositories.ToDoListRepositories
             _context = context;
         }
 
-        public void CreateToDoList(CreateToDoListDto createToDoListDto)
+        public Task CreateToDoList(CreateToDoListDto createToDoListDto)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteToDoList(int id)
+        public Task DeleteToDoList(int id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<List<ResultToDoListDto>> GetAllToDoListAsync()
+        public async Task<List<ResultToDoListDto>> GetAllToDoList()
         {
             string query = "Select * From ToDoList";
             using (var connection = _context.CreateConnection())
@@ -40,7 +40,7 @@ namespace RealEstate_Dapper_Api.Repositories.ToDoListRepositories
             throw new NotImplementedException();
         }
 
-        public void UpdateToDoList(UpdateToDoListDto updateToDoListDto)
+        public Task UpdateToDoList(UpdateToDoListDto updateToDoListDto)
         {
             throw new NotImplementedException();
         }

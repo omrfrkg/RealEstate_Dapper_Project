@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using RealEstate_Dapper_Api.Dtos.WhoWeAreDetailDtos;
 using RealEstate_Dapper_Api.Repositories.WhoWeAreRepositories;
 
@@ -25,14 +24,14 @@ namespace RealEstate_Dapper_Api.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateWhoWeAreDetail(CreateWhoWeAreDetailDto createWhoWeAreDetailDto)
         {
-            _whoWeAreDetailRepository.CreateWhoWeAreDetail(createWhoWeAreDetailDto);
+            await _whoWeAreDetailRepository.CreateWhoWeAreDetail(createWhoWeAreDetailDto);
             return Ok("Hakkımızda Kısmına Ekleme Başarılı Bir Şekilde Gerçekleşti!");
         }
 
         [HttpPut]
         public async Task<IActionResult> UpdateWhoWeAreDetail(UpdateWhoWeAreDetailDto updateWhoWeAreDetailDto)
         {
-            _whoWeAreDetailRepository.UpdateWhoWeAreDetail(updateWhoWeAreDetailDto);
+            await _whoWeAreDetailRepository.UpdateWhoWeAreDetail(updateWhoWeAreDetailDto);
             return Ok("Hakkımızda Kısmını Güncelleme İşlemi Başarılı Bir Şekilde Gerçekleşti!");
 
         }
@@ -47,7 +46,7 @@ namespace RealEstate_Dapper_Api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteWhoWeAreDetail(int id)
         {
-            _whoWeAreDetailRepository.DeleteWhoWeAreDetail(id);
+            await _whoWeAreDetailRepository.DeleteWhoWeAreDetail(id);
             return Ok("Hakkımızda Kısmını Silme İşlemi Başarılı Bir Şekilde Gerçekleşti!");
         }
     }

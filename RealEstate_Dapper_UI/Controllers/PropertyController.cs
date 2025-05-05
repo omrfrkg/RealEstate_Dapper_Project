@@ -41,10 +41,10 @@ namespace RealEstate_Dapper_UI.Controllers
             return View();
         }
 
-        [HttpGet]
-        public async Task<IActionResult> PropertySingle(int id)
+        [HttpGet("property/{slug}/{id}")]
+        public async Task<IActionResult> PropertySingle(string slug,int id)
         {
-            id = 1;
+            ViewBag.i = id;
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync("https://localhost:44378/api/Products/GetProductByProductID?id="+id);
 
@@ -56,6 +56,8 @@ namespace RealEstate_Dapper_UI.Controllers
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<ResultProductDto>(jsonData);
+
+                ViewBag.productId = values.productId;
                 ViewBag.productTitle = values.title;
                 ViewBag.price = values.price;
                 ViewBag.city = values.city;
@@ -63,9 +65,8 @@ namespace RealEstate_Dapper_UI.Controllers
                 ViewBag.address = values.address;
                 ViewBag.type = values.type;
                 ViewBag.description = values.description;
-                ViewBag.productId = values.productId;
                 ViewBag.date = values.advertisementDate;
-
+                ViewBag.slugUrl = values.SlugUrl;
 
                 var jsonData2 = await responseMessage2.Content.ReadAsStringAsync();
                 var values2 = JsonConvert.DeserializeObject<GetProductDetailByIdDto>(jsonData2);
@@ -88,10 +89,23 @@ namespace RealEstate_Dapper_UI.Controllers
                 ViewBag.location = values2.Location;
                 ViewBag.videoUrl = values2.VideoUrl;
 
+                string slugFromTitle = CreateSlug(values.title);
+                ViewBag.slugUrl = slugFromTitle;
 
                 return View(values);
             }
+
             return View();
+        }
+
+        private string CreateSlug(string title)
+        {
+            title = title.ToLowerInvariant(); // küçük harfe çevir
+            title = title.Replace(" ", "-"); // boşlukları tire ile değiştir
+            title = System.Text.RegularExpressions.Regex.Replace(title, @"[^a-z0-9-]", ""); // sadece a-z, 0-9 ve tire karakterlerini bırak
+            title = System.Text.RegularExpressions.Regex.Replace(title,@"\s+"," ").Trim();// birden fazla boşluğu tek boşluğa çevir
+            title = System.Text.RegularExpressions.Regex.Replace(title, @"\s", "-"); // boşlukları tire ile değiştir
+            return title;
         }
     }
 }

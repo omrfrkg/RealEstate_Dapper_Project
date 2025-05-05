@@ -5,10 +5,10 @@ namespace RealEstate_Dapper_Api.Repositories.TestimonialRepositories
 {
     public interface ITestimonialRepository
     {
-        Task<List<ResultTestimonialDto>> GetAllTestimonialAsync();
-        void CreateTestimonial(CreateTestimonialDto createTestimonialDto);
-        void DeleteTestimonial(int id);
-        void UpdateTestimonial(UpdateTestimonialDto updateTestimonialDto);
+        Task<List<ResultTestimonialDto>> GetAllTestimonial();
+        Task CreateTestimonial(CreateTestimonialDto createTestimonialDto);
+        Task DeleteTestimonial(int id);
+        Task UpdateTestimonial(UpdateTestimonialDto updateTestimonialDto);
         Task<GetByIdTestimonialDto> GetTestimonial(int id);
     }
 }

@@ -33,14 +33,14 @@ namespace RealEstate_Dapper_Api.Controllers
         [HttpGet("ProductDealOfTheDayStatusChangeToTrue/{id}")]
         public async Task<IActionResult> ProductDealOfTheDayStatusChangeToTrue(int id)
         {
-            _productRepository.ProductDealOfTheDayStatusChangeToTrue(id);
+            await _productRepository.ProductDealOfTheDayStatusChangeToTrue(id);
             return Ok("İlan Günün Fırsatları Arasına Eklendi!");
         }
 
         [HttpGet("ProductDealOfTheDayStatusChangeToFalse/{id}")]
         public async Task<IActionResult> ProductDealOfTheDayStatusChangeToFalse(int id)
         {
-            _productRepository.ProductDealOfTheDayStatusChangeToFalse(id);
+            await _productRepository.ProductDealOfTheDayStatusChangeToFalse(id);
             return Ok("İlan Günün Fırsatları Arasından Çıkarıldı!");
         }
 
@@ -48,6 +48,13 @@ namespace RealEstate_Dapper_Api.Controllers
         public async Task<IActionResult> Last5ProductList()
         {
             var values = await _productRepository.GetLast5ProductAsync();
+            return Ok(values);
+        }
+
+        [HttpGet("Last3ProductList")]
+        public async Task<IActionResult> Last3ProductList()
+        {
+            var values = await _productRepository.GetLast3ProductAsync();
             return Ok(values);
         }
 

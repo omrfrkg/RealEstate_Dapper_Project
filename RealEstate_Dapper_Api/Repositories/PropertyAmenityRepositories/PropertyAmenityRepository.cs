@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Dapper;
+﻿using Dapper;
 using RealEstate_Dapper_Api.Dtos.PropertyAmenityDtos;
 using RealEstate_Dapper_Api.Models.DapperContext;
 

@@ -49,10 +49,19 @@ namespace RealEstate_Dapper_Api.Repositories.ProductRepositories
         }
         public async Task<List<ResultProductWithCategoryDto>> GetAllProductWithCategoryAsync()
         {
-            string query = "Select ProductID, Title, Price, District, City, CategoryName, CoverImage, Type, Address, DealOfTheDay From Product inner join Category on Product.ProductCategory = Category.CategoryID";
+            string query = "Select ProductID, Title, Price, District, City, CategoryName, CoverImage, Type, Address, DealOfTheDay, SlugUrl From Product inner join Category on Product.ProductCategory = Category.CategoryID";
             using (var connection = _context.CreateConnection())
             {
                 var values = await connection.QueryAsync<ResultProductWithCategoryDto>(query);
+                return values.ToList();
+            }
+        }
+        public async Task<List<ResultLast3ProductWithCategoryDto>> GetLast3ProductAsync()
+        {
+            string query = "Select Top(3) ProductID, Title, Price, City, District, ProductCategory, CategoryName, AdvertisementDate, CoverImage, Description From Product Inner Join Category on Product.ProductCategory = Category.CategoryID Order By ProductID Desc";
+            using (var connection = _context.CreateConnection())
+            {
+                var values = await connection.QueryAsync<ResultLast3ProductWithCategoryDto>(query);
                 return values.ToList();
             }
         }
@@ -98,7 +107,7 @@ namespace RealEstate_Dapper_Api.Repositories.ProductRepositories
         }
         public async Task<GetProductByProductIdDto> GetProductByProductID(int id)
         {
-            string query = "Select ProductID, Title, Price, District, City, CategoryName, Description, CoverImage, Type, Address, DealOfTheDay,AdvertisementDate From Product inner join Category on Product.ProductCategory = Category.CategoryID Where ProductID=@productId";
+            string query = "Select ProductID, Title, Price, District, City, CategoryName, Description, CoverImage, Type, Address, DealOfTheDay,AdvertisementDate, SlugUrl From Product inner join Category on Product.ProductCategory = Category.CategoryID Where ProductID=@productId";
             var parameters = new DynamicParameters();
             parameters.Add("@productId", id);
             using (var connection = _context.CreateConnection())

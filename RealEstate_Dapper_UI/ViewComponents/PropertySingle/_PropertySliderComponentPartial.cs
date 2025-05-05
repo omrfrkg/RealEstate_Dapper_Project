@@ -14,10 +14,10 @@ namespace RealEstate_Dapper_UI.ViewComponents.PropertySingle
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync()
+        public async Task<IViewComponentResult> InvokeAsync(int id)
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:44378/api/ProductImages/GetProductImageByProductId?id=1");
+            var responseMessage = await client.GetAsync("https://localhost:44378/api/ProductImages/GetProductImageByProductId?id="+id);
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();

@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using RealEstate_Dapper_Api.Dtos.EmployeeDtos;
 using RealEstate_Dapper_Api.Repositories.EmployeeRepositories;
 
@@ -19,28 +18,28 @@ namespace RealEstate_Dapper_Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetEmployeeList()
         {
-            var values = await _employeRepository.GetAllEmployeeAsync();
+            var values = await _employeRepository.GetAllEmployee();
             return Ok(values);
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateEmployee(CreateEmployeeDto createEmployeeDto)
         {
-            _employeRepository.CreateEmployee(createEmployeeDto);
+            await _employeRepository.CreateEmployee(createEmployeeDto);
             return Ok("Personel Başarılı Bir Şekilde Eklendi!");
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEmployee(int id)
         {
-            _employeRepository.DeleteEmployee(id);
+            await _employeRepository.DeleteEmployee(id);
             return Ok("Personel Başarılı Bir Şekilde Silindi!");
         }
 
         [HttpPut]
         public async Task<IActionResult> UpdateEmployee(UpdateEmployeeDto updateEmployeeDto)
         {
-            _employeRepository.UpdateEmployee(updateEmployeeDto);
+            await _employeRepository.UpdateEmployee(updateEmployeeDto);
             return Ok("Personel Başarılı Bir Şekilde Güncellendi!");
 
         }
